@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../config')
 
-let Purchaseorder = require('./purchaseorder.js')(sequelize, Sequelize)
+let Purchaseorder = require('./Purchaseorder.js')(sequelize, Sequelize)
+let User = require('./User.js')(sequelize, Sequelize)
 
 // relationships
 // User.hasMany(List)
@@ -9,6 +10,9 @@ let Purchaseorder = require('./purchaseorder.js')(sequelize, Sequelize)
 // List.hasMany(Item)
 // Item.belongsTo(List)
 
+User.hasMany(Purchaseorder)
+Purchaseorder.belongsTo(User)
+
 module.exports = {
-  Purchaseorder
+  Purchaseorder, User
 }
