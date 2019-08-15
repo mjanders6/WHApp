@@ -6,6 +6,11 @@ module.exports = app => {
             .then(r => res.json(r))
             .catch(e => console.error(r))
     })
+    app.get('/users/:id', (req, res) => {
+        db.User.findOne({where: {id: req.params.id}})
+            .then(r => res.json(r))
+            .catch(e => console.error(r))
+    })
     app.post('/users', (req, res) => {
         db.User.create(req.body)
             .then(_ => res.sendStatus(200))
