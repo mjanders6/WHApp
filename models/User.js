@@ -19,6 +19,26 @@ module.exports = (sequelize, Sequelize) => {
             loggedin: {
                 type: Sequelize.INTEGER,
                 defaultValue: 0
+            },
+            salesman: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0
+            },
+            dispatch: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0
+            },
+            driver: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0
+            },
+            viewOnly: {
+                type: Sequelize.INTEGER,
+                defaultValue: 1
+            },
+            admin: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0
             }
         },
         {

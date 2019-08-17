@@ -7,7 +7,7 @@ import { stringify } from 'querystring';
 
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       users: ''
@@ -21,7 +21,7 @@ class App extends Component {
         console.log(data)
         localStorage.setItem('user', JSON.stringify(data))
       })
-  }
+    }
 
   render() {
     return (

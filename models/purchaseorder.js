@@ -21,6 +21,18 @@ module.exports = (sequelize, Sequelize) => {
             },
             poURL: {
                 type: Sequelize.STRING
+            },
+            street: {
+                type: Sequelize.STRING,
+                notNUll: true
+            },
+            city: {
+                type: Sequelize.STRING,
+                notNUll: true
+            },
+            zip: {
+                type: Sequelize.INTEGER,
+                notNUll: true
             }
         },
         {
