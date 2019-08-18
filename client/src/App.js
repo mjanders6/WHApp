@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Aloha</h1>
+        <h1>PO Pickup Process</h1>
         {/* <Test users={this.state.users.email}/> */}
         <AddPO />
       </div>
