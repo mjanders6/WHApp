@@ -34,7 +34,7 @@ module.exports = (sequelize, Sequelize) => {
             },
             viewOnly: {
                 type: Sequelize.INTEGER,
-                defaultValue: 1
+                defaultValue: 0
             },
             admin: {
                 type: Sequelize.INTEGER,

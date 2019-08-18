@@ -33,6 +33,10 @@ module.exports = (sequelize, Sequelize) => {
             zip: {
                 type: Sequelize.INTEGER,
                 notNUll: true
+            },
+            pickupDate: {
+                type: Sequelize.DATEONLY,
+                notNUll: true
             }
         },
         {
