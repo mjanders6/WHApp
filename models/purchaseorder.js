@@ -3,12 +3,12 @@ module.exports = (sequelize, Sequelize) => {
     Purchaseorder.init(
         {
             poNumber: {
-                // restrictions
+                // 
                 type: Sequelize.STRING,
                 notNUll: true
             },
             route: {
-                // restrictions
+                // 
                 type: Sequelize.STRING,
                 notNUll: true
             },

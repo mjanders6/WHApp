@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../config')
 
-let Purchaseorder = require('./Purchaseorder.js')(sequelize, Sequelize)
+let Purchaseorder = require('./purchaseorder.js')(sequelize, Sequelize)
 let User = require('./User.js')(sequelize, Sequelize)
 let Notes = require('./Notes.js')(sequelize, Sequelize)
 
