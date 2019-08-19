@@ -1,9 +1,6 @@
 const db = require('../models')
 
 module.exports = app => {
-    app.get('/', (req, res) => {
-        console.log("works")
-    })
     app.get('/purchaseorder', (req, res) => {
         db.Purchaseorder.findAll()
             .then(r => res.json(r))
