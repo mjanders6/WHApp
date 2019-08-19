@@ -9,7 +9,7 @@ app.use(express.json())
  
 require('./models')
 require('./routes')(app)
-
+ 
 require('./config').sync()
     .then(_ => app.listen(PORT))
     .catch(e => console.log(e))
