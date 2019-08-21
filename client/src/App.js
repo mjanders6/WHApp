@@ -29,6 +29,7 @@ class App extends Component {
         <h1>PO Pickup Process</h1>
         {/* <Test users={this.state.users.email}/> */}
         <AddPO />
+        {/* {JSON.parse(localStorage.getItem('user')).admin === 1 ? <AddPO /> : null} */}
       </div>
     )
   }

@@ -5,13 +5,19 @@ import PO from '../../utils/po'
 
 
 class AddPO extends Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    // }
+
     state = {
         poNumber: '',
         street: '',
         city: '',
         zip: '',
         notes: '',
-        POs: []
+        POs: [],
+        pickupdate: ''
     }
 
     componentDidMount() {
@@ -27,7 +33,7 @@ class AddPO extends Component {
                         route: po.route
                     })
                 })
-                console.log(POs)
+                console.log(data)
             })
             .catch(e => console.error(e))
     }
@@ -36,17 +42,18 @@ class AddPO extends Component {
     handleFormSubmit = event => {
         event.preventDefault()
         let addPO = {
-            poNumber: this.state.poNumber,
+            poNumber: this.poNumber,
             street: this.state.street,
             city: this.state.city,
             zip: parseInt(this.state.zip),
             note: this.state.note,
             userId: JSON.parse(localStorage.getItem('user')).id,
             status: 'In Process',
-            route: 'In Process'
+            route: 'In Process',
+            pickupdate: this.state.pickupdate
         }
-
-        PO.postOne(addPO)
+        console.log(addPO)
+        // PO.postOne(addPO)
     }
 
     handleInputChange = event => {
@@ -83,6 +90,7 @@ class AddPO extends Component {
                     city={this.city}
                     zip={this.zip}
                     note={this.note}
+                    pickupdate={this.pickupdate}
                 />
                 <POTable POs={this.state.POs} />
             </>

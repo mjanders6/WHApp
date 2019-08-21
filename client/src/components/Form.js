@@ -30,20 +30,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Form = props => {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [values, setValues] = React.useState({
-    date: moment().format("MM-DD-YYYY"),
-    tomorrow: moment().add(1, 'days').format("MM-DD-YYYY")
-  });
+  const [pickupdate, setpickupdate] = React.useState('');
+  const handleChange = event => {
+    setpickupdate(event.target.value);
+  };
 
-  const inputLabel = React.useRef(null);
-  function handleChange(event) {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-  }
 
   function handleClickOpen() {
     setOpen(true);
@@ -82,15 +76,15 @@ const Form = props => {
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="component-filled">Pickup Date</InputLabel>
                   <Select
-                    value={values.date}
+                    value={pickupdate}
                     onChange={handleChange}
                     inputProps={{
-                      name: 'date',
-                      id: 'pickup-date',
+                      name: 'pickupdate',
+                      id: 'pickupdate'
                     }}
                   >
-                    <MenuItem value={values.date}>Today</MenuItem>
-                    <MenuItem value={values.tomorrow}>Tomorrow</MenuItem>
+                    <MenuItem value={moment().format("MM-DD-YYYY")}>Today</MenuItem>
+                    <MenuItem value={moment().add(1, 'days').format("MM-DD-YYYY")}>Tomorrow</MenuItem>
                   </Select>
                 </FormControl>
                 <Grid item xs={12} container direction="row">
@@ -159,7 +153,8 @@ const Form = props => {
       </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </div >
   );
 }
+
 export default Form 
