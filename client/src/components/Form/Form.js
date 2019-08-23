@@ -2,11 +2,7 @@ import React from 'react';
 import { Form, FormGroup, Label, Input, Row, Col, Button } from 'reactstrap';
 import moment from 'moment';
 
-const POForm = ({ poNumber, handleInputChange, handleFormSubmit, street, city, zip, note, pickupDate }) => {
-
-
-
-  return (
+const POForm = ({ poNumber, handleInputChange, handleFormSubmit, street, city, zip, note, pickupDate }) => 
     <Form>
       <FormGroup row>
         <Col xs={12} sm={6} lg={6}>
@@ -47,7 +43,6 @@ const POForm = ({ poNumber, handleInputChange, handleFormSubmit, street, city, z
 
       <Button onClick={handleFormSubmit}>Schedule Your PO</Button>
     </Form>
-  );
-}
+
 
 export default POForm 

@@ -13,31 +13,28 @@ class AddPO extends Component {
             city: '',
             zip: '',
             notes: '',
-            POs: [],
             pickupdate: null,
-            addPO: '',
-            POs: []
+            addPO: []
         }
-        // this.handleInputChange = this.handleInputChange.bind(this)
-        // this.handleFormSubmit = this.handleFormSubmit.bind(this)
     }
 
     componentDidMount() {
         PO.getAll()
             .then(({ data }) => {
-                let POs = this.state.POs
+                let addPO = this.state.addPO
                 data.forEach(po => {
-                    POs.push(po)
+                    addPO.push(po)
                 })
-                this.setState({ POs })
-                console.log(POs)
+                this.setState({ addPO })
+                console.log(addPO)
             })
             .catch(e => console.error(e))
     }
 
     handleFormSubmit = event => {
         event.preventDefault()
-        let addPO = {
+        let addPO = this.state.addPO
+        addPO.push({
             poNumber: this.state.poNumber,
             street: this.state.street,
             city: this.state.city,
@@ -47,10 +44,11 @@ class AddPO extends Component {
             status: 'In Process',
             route: 'In Process',
             pickupDate: this.state.pickupDate
-        }
-        // console.log(addPO)
-        PO.postOne(addPO)
-        this.setState({addPO, poNumber: '', street: '', city: '', zip: '', note: '', pickupDate: ''})
+        })
+        // PO.postOne(addPO)
+        this.setState({ addPO })
+        console.log(addPO)
+
     }
 
     handleInputChange = event => {
@@ -69,7 +67,7 @@ class AddPO extends Component {
                     note={this.note}
                     pickupdate={this.pickupDate}
                 />
-                <POTable POs={this.state.POs} />
+                <POTable addPO={this.state.addPO} />
             </>
         )
     }

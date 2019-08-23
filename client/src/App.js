@@ -1,38 +1,16 @@
-import React, { Component } from 'react';
-import Test from './pages/Test'
+import React from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import AddPO from './pages/AddPO'
-import User from './utils/user.js'
-import './App.css';
-import { stringify } from 'querystring';
 
+const App = _ =>
+  <Router>
+    <div>
+      <nav>
+        <Link to='/'>Home</Link>
+        <Link to='/AddPO'>Add PO</Link>
+      </nav>
+      <Route exact path='/AddPO' component={_ => <AddPO />} />
+    </div>
+  </Router>
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      users: ''
-    }
-  }
-
-  componentDidMount() {
-    User.getOne(1)
-      .then(({ data }) => {
-        this.setState({ users: data })
-        console.log(data)
-        localStorage.setItem('user', JSON.stringify(data))
-      })
-    }
-
-  render() {
-    return (
-      <div>
-        <h1>PO Pickup Process</h1>
-        {/* <Test users={this.state.users.email}/> */}
-        <AddPO />
-        {/* {JSON.parse(localStorage.getItem('user')).admin === 1 ? <AddPO /> : null} */}
-      </div>
-    )
-  }
-}
-
-export default App;
+export default App

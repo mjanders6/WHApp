@@ -2,10 +2,7 @@ import React from 'react';
 import { Table } from 'reactstrap';
 
 
-const PickUpTable = ({ POs }) => {
-
-
-    return (
+const PickUpTable = ({ addPO }) => 
         <Table hover>
             <thead>
                 <tr>
@@ -16,16 +13,15 @@ const PickUpTable = ({ POs }) => {
                 </tr>
             </thead>
             <tbody>
-                {POs.map(row => (
+                {addPO.map(row => (
                     <tr key={row.id}>
-                        <td scope='row'>{row.poNumber}</td>
-                        <td>{row.note}</td>
-                        <td>{row.route}</td>
-                        <td>{row.status}</td>
+                        <td key={row.id}  scope='row'>{row.poNumber}</td>
+                        <td key={row.id} >{row.note}</td>
+                        <td key={row.id} >{row.route}</td>
+                        <td key={row.id} >{row.status}</td>
                     </tr>
                 ))}
             </tbody>
         </Table>
-    );
-}
+
 export default PickUpTable
