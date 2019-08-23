@@ -45,7 +45,7 @@ class AddPO extends Component {
             route: 'In Process',
             pickupDate: this.state.pickupDate
         })
-        // PO.postOne(addPO)
+        PO.postOne(addPO)
         this.setState({ addPO })
         console.log(addPO)
 
