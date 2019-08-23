@@ -21,20 +21,14 @@ class AddPO extends Component {
     componentDidMount() {
         PO.getAll()
             .then(({ data }) => {
-                let addPO = this.state.addPO
-                data.forEach(po => {
-                    addPO.push(po)
-                })
-                this.setState({ addPO })
-                console.log(addPO)
+                this.setState({ addPO: data })
             })
             .catch(e => console.error(e))
     }
 
     handleFormSubmit = event => {
         event.preventDefault()
-        let addPO = this.state.addPO
-        addPO.push({
+        let pos = {
             poNumber: this.state.poNumber,
             street: this.state.street,
             city: this.state.city,
@@ -44,10 +38,13 @@ class AddPO extends Component {
             status: 'In Process',
             route: 'In Process',
             pickupDate: this.state.pickupDate
-        })
-        PO.postOne(addPO)
-        this.setState({ addPO })
-        console.log(addPO)
+        }
+
+        let addPO = this.state.addPO
+        PO.postOne(pos) // add to DB
+        addPO.push(pos) // push to state
+        this.setState({ addPO }) // setState to show new addition
+        // console.log(addPO)
 
     }
 

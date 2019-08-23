@@ -15,10 +15,10 @@ const PickUpTable = ({ addPO }) =>
             <tbody>
                 {addPO.map(row => (
                     <tr key={row.id}>
-                        <td key={row.id}  scope='row'>{row.poNumber}</td>
-                        <td key={row.id} >{row.note}</td>
-                        <td key={row.id} >{row.route}</td>
-                        <td key={row.id} >{row.status}</td>
+                        <td  scope='row'>{row.poNumber}</td>
+                        <td >{row.note}</td>
+                        <td >{row.route}</td>
+                        <td >{row.status}</td>
                     </tr>
                 ))}
             </tbody>
