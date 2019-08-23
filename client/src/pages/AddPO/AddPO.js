@@ -14,8 +14,16 @@ class AddPO extends Component {
             zip: '',
             notes: '',
             pickupdate: null,
-            addPO: []
+            addPO: [],
+            modal: false
         }
+        this.toggle = this.toggle.bind(this)
+    }
+
+    toggle() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
     }
 
     componentDidMount() {
@@ -57,6 +65,8 @@ class AddPO extends Component {
             <>
                 <Form handleInputChange={this.handleInputChange}
                     handleFormSubmit={this.handleFormSubmit}
+                    toggle={this.toggle}
+                    modal={this.state.modal}
                     poNumber={this.poNumber}
                     street={this.street}
                     city={this.city}

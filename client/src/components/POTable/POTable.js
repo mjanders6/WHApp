@@ -15,7 +15,7 @@ const PickUpTable = ({ addPO }) =>
             <tbody>
                 {addPO.map(row => (
                     <tr key={row.id}>
-                        <td  scope='row'>{row.poNumber}</td>
+                        <td scope='row'>{row.poNumber}</td>
                         <td >{row.note}</td>
                         <td >{row.route}</td>
                         <td >{row.status}</td>
