@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Jumbotron, Container, Row, Col, Button } from 'reactstrap'
 import LoginForm from '../../components/LoginForm'
+import User from '../../utils/user'
 
 
 class AddPO extends Component {
@@ -26,6 +27,14 @@ class AddPO extends Component {
     handleFormSubmit = event => {
         event.preventDefault()
 
+        let email = this.state.email
+        User.getUserName(email)
+            .then(({ data }) => {
+                localStorage.setItem('user', JSON.stringify(data))
+                console.log(data)
+            })
+            .catch(e => console.error(e))
+
     }
 
     handleInputChange = event => {
@@ -48,6 +57,7 @@ class AddPO extends Component {
                                 <Button id='login' color="primary" onClick={this.toggle}>Login</Button>
                                 <LoginForm
                                     handleInputChange={this.handleInputChange}
+                                    handleFormSubmit={this.handleFormSubmit}
                                     email={this.email}
                                     toggle={this.toggle}
                                     modal={this.state.modal}

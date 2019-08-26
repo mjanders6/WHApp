@@ -37,12 +37,6 @@ class AddPO extends Component {
                 this.setState({ addPO: data })
             })
             .catch(e => console.error(e))
-
-        User.getOne(1)
-            .then(({ data }) => {
-                localStorage.setItem('user', JSON.stringify(data))
-            })
-            .catch(e => console.error(e))
     }
 
     nameFilter = event => {
@@ -54,7 +48,7 @@ class AddPO extends Component {
             })
             .catch(e => console.error(e))
     }
-    
+
     clearFilter = event => {
         event.preventDefault()
         PO.getAll()
@@ -97,7 +91,7 @@ class AddPO extends Component {
                     <Container fluid>
                         <Row>
                             <Col>
-                                <h1 className="display-3">Hello, world!</h1>
+                                <h1 className="display-3">Hello, {JSON.parse(localStorage.getItem('user')).username}</h1>
                                 <hr className="my-2" />
                             </Col>
                         </Row>

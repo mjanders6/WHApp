@@ -6,8 +6,13 @@ module.exports = app => {
             .then(r => res.json(r))
             .catch(e => console.error(r))
     })
-    app.get('/users/:id', (req, res) => {
-        db.User.findOne({where: {id: req.params.id}})
+    // app.get('/users/:id', (req, res) => {
+    //     db.User.findOne({where: {id: req.params.id}})
+    //         .then(r => res.json(r))
+    //         .catch(e => console.error(r))
+    // })
+    app.get('/users/:username', (req, res) => {
+        db.User.findOne({where: {username: req.params.username}})
             .then(r => res.json(r))
             .catch(e => console.error(r))
     })
