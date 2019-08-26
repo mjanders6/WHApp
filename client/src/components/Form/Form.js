@@ -5,7 +5,7 @@ import moment from 'moment';
 const POForm = ({ poNumber, handleInputChange, handleFormSubmit, street, city, zip, note, pickupDate, toggle, modal }) => {
   return (
     <>
-    <Button color="primary" onClick={toggle}>Add PO</Button>
+    {/* <Button color="primary" onClick={toggle}>Add PO</Button> */}
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader>Add a PO</ModalHeader>
       <ModalBody>

@@ -6,6 +6,11 @@ module.exports = app => {
             .then(r => res.json(r))
             .catch(e => console.error(r))
     })
+    app.get('/purchaseorder/:uId', (req, res) => {
+        db.Purchaseorder.findAll({where: {userId: req.params.uId}})
+            .then(r => res.json(r))
+            .catch(e => console.error(r))
+    })
     app.post('/purchaseorder', (req, res) => {
         db.Purchaseorder.create(req.body)
             .then(_ => res.sendStatus(200))

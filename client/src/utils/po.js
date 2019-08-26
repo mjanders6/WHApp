@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const PO = {
     getAll: _ => axios.get('/purchaseorder'),
-    getOne: id => axios.get(`/purchaseorder/${id}`),
+    getPObyUser: uId => axios.get(`/purchaseorder/${uId}`),
     postOne: po => axios.post('/purchaseorder', po)
 }
 
