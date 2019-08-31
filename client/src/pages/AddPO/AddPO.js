@@ -20,7 +20,9 @@ class AddPO extends Component {
             pickupdate: null,
             addPO: [],
             modal: false,
-            filter: ''
+            filter: '',
+            routeDD: '',
+            route: ''
         }
         this.toggle = this.toggle.bind(this)
     }
@@ -84,6 +86,20 @@ class AddPO extends Component {
         this.setState({ [event.target.id]: event.target.value })
     }
 
+    handleRouteChange = event => {
+        this.setState({ [event.target.id]: event.target.value })
+        // console.log(event.target.id)
+        // console.log(event.target.value)
+        PO.routeUpdate(event.target.id, { route: event.target.value })
+    }
+
+    handleStatusChange = event => {
+        this.setState({ [event.target.id]: event.target.value })
+        // console.log(event.target.id)
+        // console.log(event.target.value)
+        PO.routeUpdate(event.target.id, { status: event.target.value })
+    }
+
     render() {
         return (
             <>
@@ -117,7 +133,7 @@ class AddPO extends Component {
                         </Row>
                     </Container>
                 </Jumbotron>
-                <POTable addPO={this.state.addPO} />
+                <POTable handleRouteChange={this.handleRouteChange} handleStatusChange={this.handleStatusChange} addPO={this.state.addPO} routeDD={this.routeDD} />
             </>
         )
     }

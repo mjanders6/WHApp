@@ -48,7 +48,7 @@ const POForm = ({ poNumber, handleInputChange, handleFormSubmit, street, city, z
             </Col>
           </FormGroup>
 
-          <Button color="primary"onClick={handleFormSubmit}>Schedule Your PO</Button>
+          <Button color="primary" onClick={handleFormSubmit}>Schedule Your PO</Button>
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </Form>
       </ModalBody>
