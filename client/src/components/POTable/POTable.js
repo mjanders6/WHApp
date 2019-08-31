@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Input } from 'reactstrap';
+import { Table, Input, Button } from 'reactstrap';
 
 
 const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange }) =>
@@ -10,6 +10,13 @@ const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange }) 
                 <th>Notes</th>
                 <th>Route</th>
                 <th>Status</th>
+                {
+                    JSON.parse(localStorage.getItem('user')).driver === 1 || JSON.parse(localStorage.getItem('user')).admin === 1 ?
+                        <tr>
+                            <th>Drivers Notes</th>
+                            <th></th>
+                        </tr> : null
+                }
             </tr>
         </thead>
         <tbody>
@@ -17,7 +24,7 @@ const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange }) 
                 <tr key={row.id}>
                     <td scope='row'>{row.poNumber}</td>
                     <td >{row.note}</td>
-                    {/* <td >{row.route} <RouteDropDown /></td> */}
+                    {/* Route - dropdown if dispatch or admin */}
                     {
                         JSON.parse(localStorage.getItem('user')).admin === 1 || JSON.parse(localStorage.getItem('user')).dispatch === 1 ?
                             <td >
@@ -32,7 +39,7 @@ const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange }) 
                             </td> :
                             <td>{row.route}</td>
                     }
-                    {/* <td >{row.status}</td> */}
+                    {/* Status - dropdown if dispatch or admin */}
                     {
                         JSON.parse(localStorage.getItem('user')).admin === 1 || JSON.parse(localStorage.getItem('user')).dispatch === 1 ?
                             <td >
@@ -45,6 +52,13 @@ const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange }) 
                                 </Input>
                             </td> :
                             <td>{row.status}</td>
+                    }
+                    {
+                        JSON.parse(localStorage.getItem('user')).driver === 1 || JSON.parse(localStorage.getItem('user')).admin === 1 ?
+                            <tr>
+                                <td><Input id="poNumber" type="text" name="search" /></td>
+                                <td><Button color="primary" >Add Note</Button></td>
+                            </tr> : null
                     }
                 </tr>
             ))}

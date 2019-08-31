@@ -69,8 +69,8 @@ class AddPO extends Component {
             zip: parseInt(this.state.zip),
             note: this.state.note,
             userId: JSON.parse(localStorage.getItem('user')).id,
-            status: 'In Process',
-            route: 'In Process',
+            status: 'Pending Dispatch',
+            route: 'Pending Dispatch',
             pickupDate: this.state.pickupDate
         }
 
@@ -133,7 +133,10 @@ class AddPO extends Component {
                         </Row>
                     </Container>
                 </Jumbotron>
-                <POTable handleRouteChange={this.handleRouteChange} handleStatusChange={this.handleStatusChange} addPO={this.state.addPO} routeDD={this.routeDD} />
+                <POTable handleRouteChange={this.handleRouteChange} 
+                handleStatusChange={this.handleStatusChange} 
+                addPO={this.state.addPO} 
+                routeDD={this.routeDD} />
             </>
         )
     }
