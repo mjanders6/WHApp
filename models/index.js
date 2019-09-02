@@ -10,6 +10,7 @@ Purchaseorder.belongsTo(User)
 
 User.hasMany(Notes)
 Notes.belongsTo(User)
+Notes.belongsTo(Purchaseorder)
 
 Purchaseorder.hasMany(Notes)
 Notes.belongsTo(Purchaseorder)

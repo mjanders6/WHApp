@@ -1,4 +1,5 @@
 import React from 'react';
+import './Form.css'
 import { Form, FormGroup, Label, Input, Row, Col, Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import moment from 'moment';
 

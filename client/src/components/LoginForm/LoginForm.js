@@ -8,7 +8,7 @@ const LoginForm = ({ handleInputChange, handleFormSubmit, email, toggle, modal }
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader>Add a PO</ModalHeader>
       <ModalBody>
-        <Form>
+        <Form className='login-form'>
           <FormGroup row>
             <Col xs={12} sm={4} lg={4}>
               <Label htmlFor="email">Email:</Label>

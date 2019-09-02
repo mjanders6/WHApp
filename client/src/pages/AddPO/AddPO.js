@@ -4,7 +4,7 @@ import './AddPO.css'
 import Form from '../../components/Form/Form'
 import POTable from '../../components/POTable/POTable'
 import PO from '../../utils/po'
-import User from '../../utils/user'
+import Notes from '../../utils/drivernotes'
 
 
 
@@ -16,13 +16,14 @@ class AddPO extends Component {
             street: '',
             city: '',
             zip: '',
-            notes: '',
             pickupdate: null,
             addPO: [],
             modal: false,
             filter: '',
             routeDD: '',
-            route: ''
+            route: '',
+            driverNote: '',
+            poNotes: []
         }
         this.toggle = this.toggle.bind(this)
     }
@@ -34,11 +35,18 @@ class AddPO extends Component {
     }
 
     componentDidMount() {
+        Notes.getAllNotes()
+            .then(({ data }) => {
+                this.setState({ poNotes: data })
+            })
+            .catch(e => console.error(e))
+
         PO.getAll()
             .then(({ data }) => {
                 this.setState({ addPO: data })
             })
             .catch(e => console.error(e))
+
     }
 
     nameFilter = event => {
@@ -100,6 +108,21 @@ class AddPO extends Component {
         PO.routeUpdate(event.target.id, { status: event.target.value })
     }
 
+    handleDriverNote = event => {
+        event.preventDefault()
+        let drvNote = {
+            note: this.state.driverNote,
+            userId: JSON.parse(localStorage.getItem('user')).id,
+            purchaseorderId: event.target.id
+        }
+
+        let poNotes = this.state.poNotes
+        Notes.postNote(drvNote)
+        poNotes.push(drvNote)
+        this.setState({ poNotes })
+        console.log(poNotes)
+    }
+
     render() {
         return (
             <>
@@ -133,10 +156,14 @@ class AddPO extends Component {
                         </Row>
                     </Container>
                 </Jumbotron>
-                <POTable handleRouteChange={this.handleRouteChange} 
-                handleStatusChange={this.handleStatusChange} 
-                addPO={this.state.addPO} 
-                routeDD={this.routeDD} />
+                <POTable handleRouteChange={this.handleRouteChange}
+                    handleInputChange={this.handleInputChange}
+                    handleStatusChange={this.handleStatusChange}
+                    handleDriverNote={this.handleDriverNote}
+                    addPO={this.state.addPO}
+                    poNotes={this.state.poNotes}
+                    routeDD={this.routeDD}
+                    driverNote={this.driverNote} />
             </>
         )
     }
