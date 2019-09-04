@@ -23,7 +23,8 @@ class AddPO extends Component {
             routeDD: '',
             route: '',
             driverNote: '',
-            poNotes: []
+            poNotes: [],
+            newPO: []
         }
         this.toggle = this.toggle.bind(this)
     }
@@ -35,18 +36,33 @@ class AddPO extends Component {
     }
 
     componentDidMount() {
-        Notes.getAllNotes()
-            .then(({ data }) => {
-                this.setState({ poNotes: data })
-            })
-            .catch(e => console.error(e))
+        let newPO = this.state.newPO
+        newPO.notes = []
 
         PO.getAll()
             .then(({ data }) => {
+                let poData = data
+                data.map(po => {
+                    po.driverNote = []
+                })
                 this.setState({ addPO: data })
             })
             .catch(e => console.error(e))
 
+        Notes.getAllNotes()
+            .then(({ data }) => {
+                let addPO = this.state.addPO
+                data.map(note => {
+                    addPO.map(po => {
+                        if (po.id === parseInt(note.purchaseorderId)) {
+                            po.driverNote.push(note.note)
+                        }
+                    })
+                })
+                // console.log(addPO)
+                this.setState({ addPO })
+            })
+            .catch(e => console.error(e))
     }
 
     nameFilter = event => {
@@ -54,7 +70,25 @@ class AddPO extends Component {
         let name = JSON.parse(localStorage.getItem('user')).id
         PO.getPObyUser(name)
             .then(({ data }) => {
+                data.map(po => {
+                    po.driverNote = []
+                })
                 this.setState({ addPO: data })
+            })
+            .catch(e => console.error(e))
+
+        Notes.getAllNotes()
+            .then(({ data }) => {
+                let addPO = this.state.addPO
+                data.map(note => {
+                    addPO.map(po => {
+                        if (po.id === parseInt(note.purchaseorderId)) {
+                            po.driverNote.push(note.note)
+                        }
+                    })
+                })
+                // console.log(addPO)
+                this.setState({ addPO })
             })
             .catch(e => console.error(e))
     }
@@ -63,7 +97,25 @@ class AddPO extends Component {
         event.preventDefault()
         PO.getAll()
             .then(({ data }) => {
+                data.map(po => {
+                    po.driverNote = []
+                })
                 this.setState({ addPO: data })
+            })
+            .catch(e => console.error(e))
+
+        Notes.getAllNotes()
+            .then(({ data }) => {
+                let addPO = this.state.addPO
+                data.map(note => {
+                    addPO.map(po => {
+                        if (po.id === parseInt(note.purchaseorderId)) {
+                            po.driverNote.push(note.note)
+                        }
+                    })
+                })
+                // console.log(addPO)
+                this.setState({ addPO })
             })
             .catch(e => console.error(e))
     }
@@ -73,6 +125,7 @@ class AddPO extends Component {
         let pos = {
             poNumber: this.state.poNumber,
             street: this.state.street,
+            driverNote: [],
             city: this.state.city,
             zip: parseInt(this.state.zip),
             note: this.state.note,
@@ -115,12 +168,14 @@ class AddPO extends Component {
             userId: JSON.parse(localStorage.getItem('user')).id,
             purchaseorderId: event.target.id
         }
-
-        let poNotes = this.state.poNotes
+        let addPO = this.state.addPO
         Notes.postNote(drvNote)
-        poNotes.push(drvNote)
-        this.setState({ poNotes })
-        console.log(poNotes)
+        addPO.map(po => {
+            if (po.id === parseInt(drvNote.purchaseorderId)) {
+                po.driverNote.push(drvNote.note)
+            }
+        })
+        this.setState({ addPO })
     }
 
     render() {

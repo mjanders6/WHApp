@@ -3,7 +3,7 @@ import './POTable.css'
 import { Table, Input, Button } from 'reactstrap';
 
 
-const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange, handleDriverNote, handleInputChange, driverNote, poNotes }) =>
+const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange, handleDriverNote, handleInputChange, driverNote }) =>
     <Table hover responsive>
         <thead>
             <tr>
@@ -55,25 +55,17 @@ const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange, ha
                     {
                         JSON.parse(localStorage.getItem('user')).driver === 1 || JSON.parse(localStorage.getItem('user')).admin === 1 ?
                             <>
-                                <td>{
-                                    poNotes.filter(note => {
-                                        return note.purchaseorderId === row.id
-                                    }).map(notes => (
-                                        <tr>- {notes.note}</tr>
-                                    ))
-                                }</td>
+                                <td>{row.driverNote.map(note => (
+                                    <tr>- {note}</tr>
+                                ))}</td>
                                 <td><Input type="text" name="search" data-id={row.id} id='driverNote' value={driverNote} onChange={handleInputChange} /></td>
                                 <td><Button color="primary" id={row.id} onClick={handleDriverNote}>Add Note</Button></td>
                             </> :
-                            <td>{
-                                poNotes.map(notes => {
-                                    return notes
-                                }).filter(note => {
-                                    return note.purchaseorderId === row.id
-                                }).map(notes => (
-                                    <tr>- {notes.note}</tr>
-                                ))
-                            }</td>
+                            <>
+                                <td>{row.driverNote.map(note => (
+                                    <tr>- {note}</tr>
+                                ))}</td>
+                            </>
                     }
                 </tr>
             ))}
