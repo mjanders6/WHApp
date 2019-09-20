@@ -36,33 +36,14 @@ class AddPO extends Component {
     }
 
     componentDidMount() {
-        let newPO = this.state.newPO
-        newPO.notes = []
 
         PO.getAll()
             .then(({ data }) => {
-                let poData = data
-                data.map(po => {
-                    po.driverNote = []
-                })
                 this.setState({ addPO: data })
+                console.log(data)
             })
             .catch(e => console.error(e))
 
-        Notes.getAllNotes()
-            .then(({ data }) => {
-                let addPO = this.state.addPO
-                data.map(note => {
-                    addPO.map(po => {
-                        if (po.id === parseInt(note.purchaseorderId)) {
-                            po.driverNote.push(note.note)
-                        }
-                    })
-                })
-                // console.log(addPO)
-                this.setState({ addPO })
-            })
-            .catch(e => console.error(e))
     }
 
     nameFilter = event => {
@@ -70,54 +51,20 @@ class AddPO extends Component {
         let name = JSON.parse(localStorage.getItem('user')).id
         PO.getPObyUser(name)
             .then(({ data }) => {
-                data.map(po => {
-                    po.driverNote = []
-                })
                 this.setState({ addPO: data })
             })
             .catch(e => console.error(e))
 
-        Notes.getAllNotes()
-            .then(({ data }) => {
-                let addPO = this.state.addPO
-                data.map(note => {
-                    addPO.map(po => {
-                        if (po.id === parseInt(note.purchaseorderId)) {
-                            po.driverNote.push(note.note)
-                        }
-                    })
-                })
-                // console.log(addPO)
-                this.setState({ addPO })
-            })
-            .catch(e => console.error(e))
     }
 
     clearFilter = event => {
         event.preventDefault()
         PO.getAll()
             .then(({ data }) => {
-                data.map(po => {
-                    po.driverNote = []
-                })
                 this.setState({ addPO: data })
             })
             .catch(e => console.error(e))
 
-        Notes.getAllNotes()
-            .then(({ data }) => {
-                let addPO = this.state.addPO
-                data.map(note => {
-                    addPO.map(po => {
-                        if (po.id === parseInt(note.purchaseorderId)) {
-                            po.driverNote.push(note.note)
-                        }
-                    })
-                })
-                // console.log(addPO)
-                this.setState({ addPO })
-            })
-            .catch(e => console.error(e))
     }
 
     handleFormSubmit = event => {
@@ -125,7 +72,6 @@ class AddPO extends Component {
         let pos = {
             poNumber: this.state.poNumber,
             street: this.state.street,
-            driverNote: [],
             city: this.state.city,
             zip: parseInt(this.state.zip),
             note: this.state.note,
@@ -166,13 +112,14 @@ class AddPO extends Component {
         let drvNote = {
             note: this.state.driverNote,
             userId: JSON.parse(localStorage.getItem('user')).id,
+            user: {username: JSON.parse(localStorage.getItem('user')).username},
             purchaseorderId: event.target.id
         }
         let addPO = this.state.addPO
         Notes.postNote(drvNote)
         addPO.map(po => {
             if (po.id === parseInt(drvNote.purchaseorderId)) {
-                po.driverNote.push(drvNote.note)
+                po.notes.push(drvNote)
             }
         })
         this.setState({ addPO })

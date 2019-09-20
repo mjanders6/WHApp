@@ -55,15 +55,15 @@ const PickUpTable = ({ addPO, routeDD, handleRouteChange, handleStatusChange, ha
                     {
                         JSON.parse(localStorage.getItem('user')).driver === 1 || JSON.parse(localStorage.getItem('user')).admin === 1 ?
                             <>
-                                <td>{row.driverNote.map(note => (
-                                    <tr>- {note}</tr>
+                                <td>{row.notes.map(note => (
+                                    <tr>{note.user.username}: {note.note}</tr>
                                 ))}</td>
                                 <td><Input type="text" name="search" data-id={row.id} id='driverNote' value={driverNote} onChange={handleInputChange} /></td>
                                 <td><Button color="primary" id={row.id} onClick={handleDriverNote}>Add Note</Button></td>
                             </> :
                             <>
-                                <td>{row.driverNote.map(note => (
-                                    <tr>- {note}</tr>
+                                <td>{row.notes.map(note => (
+                                    <tr>{note.user.username}: {note.note}</tr>
                                 ))}</td>
                             </>
                     }
