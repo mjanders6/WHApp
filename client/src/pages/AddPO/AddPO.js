@@ -78,7 +78,9 @@ class AddPO extends Component {
             userId: JSON.parse(localStorage.getItem('user')).id,
             status: 'Pending Dispatch',
             route: 'Pending Dispatch',
-            pickupDate: this.state.pickupDate
+            pickupDate: this.state.pickupDate,
+            user: {username: JSON.parse(localStorage.getItem('user')).username},
+            notes: []
         }
 
         let addPO = this.state.addPO
