@@ -3,7 +3,7 @@ const { join } = require('path')
 const app = express()
 const PORT = process.env.PORT || 3001
 
-app.use(express.static(join(__dirname, 'client', 'public', 'build')))
+app.use(express.static(join(__dirname, 'client', 'build')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
  
