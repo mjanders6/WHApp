@@ -11,7 +11,7 @@ const POForm = ({ poNumber, handleInputChange, handleFormSubmit, street, city, z
       <ModalHeader>Add a PO</ModalHeader>
       <ModalBody>
 
-        <Form>
+        <Form id='addPO'>
           <FormGroup row>
             <Col xs={12} sm={6} lg={6}>
               <Label htmlFor="POPick">PO Pickup:</Label>

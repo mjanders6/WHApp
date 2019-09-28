@@ -79,7 +79,7 @@ class AddPO extends Component {
             status: 'Pending Dispatch',
             route: 'Pending Dispatch',
             pickupDate: this.state.pickupDate,
-            user: {username: JSON.parse(localStorage.getItem('user')).username},
+            user: { username: JSON.parse(localStorage.getItem('user')).username },
             notes: []
         }
 
@@ -88,7 +88,10 @@ class AddPO extends Component {
         addPO.push(pos) // push to state
         this.setState({ addPO }) // setState to show new addition
         // console.log(addPO)
-
+        document.getElementById('addPO').reset()
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
     }
 
     handleInputChange = event => {
@@ -114,7 +117,7 @@ class AddPO extends Component {
         let drvNote = {
             note: this.state.driverNote,
             userId: JSON.parse(localStorage.getItem('user')).id,
-            user: {username: JSON.parse(localStorage.getItem('user')).username},
+            user: { username: JSON.parse(localStorage.getItem('user')).username },
             purchaseorderId: event.target.id
         }
         let addPO = this.state.addPO

@@ -32,6 +32,10 @@ class AddPO extends Component {
             .then(({ data }) => {
                 localStorage.setItem('user', JSON.stringify(data))
                 console.log(data)
+                document.getElementById('loginForm').reset()
+                this.setState(prevState => ({
+                    modal: !prevState.modal
+                }));
             })
             .catch(e => console.error(e))
     }
